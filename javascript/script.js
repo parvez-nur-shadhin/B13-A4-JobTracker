@@ -1,5 +1,9 @@
 // Heading Counting And Buttons Functionality
 
+// list array
+let interviewList = [];
+let rejectedList = [];
+
 // Counting Numbers
 const totalCount = getElementValues('total-counting');
 const interviewCount = getElementValues('interview-counting');
@@ -26,5 +30,32 @@ function toggleStyle(id){
 
     const clickedBtn = getElementOnly(id);
     clickedBtn.classList.add('bg-[#3B82F6]', 'text-white');
+}
+
+// body container 
+const bodyContainer = getElementOnly('body-container');
+bodyContainer.addEventListener('click', function(event){
+    const parentNode = event.target.parentNode.parentNode;
+    const companyName = document.querySelector('.company').innerText;
+    const positionName = document.querySelector('.position').innerText;
+    const locationName = document.querySelector('.location').innerText;
+    const descriptionName = document.querySelector('.description').innerText;
+    
+    // creating object
+    let cardInformation = {
+        companyName, 
+        positionName, 
+        locationName, 
+        descriptionName
+    }
+
+    const plantExists = interviewList.find(item => item.companyName === cardInformation.companyName);
+    if(!plantExists){
+        interviewList.push(cardInformation);
+    }
+})
+
+function renderInterview(){
+    
 }
 
