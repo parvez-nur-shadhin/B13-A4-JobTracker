@@ -35,15 +35,15 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
             <div class="bg-white p-[20px] rounded-lg">
                 <h2 class="text-[0.875rem] text-[#002C5C]">Total</h2>
-                <h1 id="total-counting" class="text-[1.5rem] text-[#002C5C] font-bold mt-[10px]">8</h1>
+                <h1 id="total-counting" class="text-[1.5rem] text-[#002C5C] font-bold mt-[10px]">0</h1>
             </div>
             <div class="bg-white p-[20px] rounded-lg">
                 <h2 class="text-[0.875rem] text-[#002C5C]">Interview</h2>
-                <h1 id="total-counting" class="text-[1.5rem] text-[#10B981] font-bold mt-[10px]">0</h1>
+                <h1 id="interview-counting" class="text-[1.5rem] text-[#10B981] font-bold mt-[10px]">0</h1>
             </div>
             <div class="bg-white p-[20px] rounded-lg">
                 <h2 class="text-[0.875rem] text-[#002C5C]">Rejected</h2>
-                <h1 id="total-counting" class="text-[1.5rem] text-[#EF4444] font-bold mt-[10px]">0</h1>
+                <h1 id="rejected-counting" class="text-[1.5rem] text-[#EF4444] font-bold mt-[10px]">0</h1>
             </div>
         </div>
     </header>
@@ -63,14 +63,14 @@
         </div>
         <!-- Button Section -->
         <div class="max-w-[1100px] mx-auto flex gap-[8px] mt-6">
-            <button id="all-btn" class="btn btn-outline btn-info">All</button>
-            <button id="interview-btn" class="btn btn-outline btn-info">Interview</button>
-            <button id="rejected-btn" class="btn btn-outline btn-info">Rejected</button>
+            <button onclick="toggleStyle('all-btn')" id="all-btn" class="btn btn-outline btn-info">All</button>
+            <button onclick="toggleStyle('interview-btn')" id="interview-btn" class="btn btn-outline btn-info">Interview</button>
+            <button onclick="toggleStyle('rejected-btn')" id="rejected-btn" class="btn btn-outline btn-info">Rejected</button>
         </div>
     </section>
 
     <!-- job cards -->
-     <section class="max-w-[1100px] mx-auto">
+     <section id="all-job-cards" class="max-w-[1100px] mx-auto">
         <!-- Div Card -->
         <div class="card-container bg-[#FFFFFF] space-y-5 p-[24px] rounded-lg mt-[10px]">
             <div class="flex justify-between">
@@ -241,5 +241,16 @@
         </div>
      </section>
 
+    <!-- no jobs available -->
+     <!-- <section id="no-jobs-available" class="max-w-[1100px] mx-auto grid grid-cols-1 items-center justify-center gap-4 px-[14px] py-[100px] bg-white mt-5 hidden">
+        <img src="./jobs.png" alt="job-image">
+        <h1 class="text-[4rem] text-[#002C5C] font-semibold">No jobs available</h1>
+        <p class="text-[#64748B]">Check back soon for new job opportunities</p>
+     </section> -->
+
+
+     <!-- Javascript Link-->
+      <script src="./javascript/machine.js"></script>
+      <script src="./javascript/script.js"></script>
 </body>
 </html>
