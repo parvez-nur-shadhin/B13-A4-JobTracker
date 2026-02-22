@@ -5,57 +5,118 @@ let interviewList = [];
 let rejectedList = [];
 
 // Counting Numbers
-const totalCount = getElementValues('total-counting');
-const interviewCount = getElementValues('interview-counting');
-const rejectedCount = getElementValues('rejected-counting');
+const totalCount = getElementValues("total-counting");
+const interviewCount = getElementValues("interview-counting");
+const rejectedCount = getElementValues("rejected-counting");
 
-let allJobCards = document.getElementById('all-job-cards');
+let allJobCards = document.getElementById("all-job-cards");
 
 // Toggling Buttons
-const allBtn = getElementOnly('all-btn');
-const interviewBtn = getElementOnly('interview-btn');
-const rejectedBtn = getElementOnly('rejected-btn');
+const allBtn = getElementOnly("all-btn");
+const interviewBtn = getElementOnly("interview-btn");
+const rejectedBtn = getElementOnly("rejected-btn");
 
-
-function finalCount(){
-    document.getElementById('total-counting').innerText = allJobCards.children.length;
-};
+function finalCount() {
+  document.getElementById("total-counting").innerText =
+    allJobCards.children.length;
+}
 finalCount();
 
+function toggleStyle(id) {
+  allBtn.classList.remove("bg-[#3B82F6]", "text-white");
+  interviewBtn.classList.remove("bg-[#3B82F6]", "text-white");
+  rejectedBtn.classList.remove("bg-[#3B82F6]", "text-white");
 
-function toggleStyle(id){
-    allBtn.classList.remove('bg-[#3B82F6]', 'text-white');
-    interviewBtn.classList.remove('bg-[#3B82F6]', 'text-white');
-    rejectedBtn.classList.remove('bg-[#3B82F6]', 'text-white');
+  const clickedBtn = getElementOnly(id);
+  clickedBtn.classList.add("bg-[#3B82F6]", "text-white");
 
-    const clickedBtn = getElementOnly(id);
-    clickedBtn.classList.add('bg-[#3B82F6]', 'text-white');
+  if (id === "interview-btn") {
+    const sectionJobCard = document.getElementById("all-job-cards");
+    sectionJobCard.classList.add("hidden");
+    const sectionFiltered = document.getElementById("filtered-Section");
+    sectionFiltered.classList.remove("hidden");
+  }
+  if (id === "all-btn") {
+    const sectionJobCard = document.getElementById("all-job-cards");
+    sectionJobCard.classList.remove("hidden");
+    const sectionFiltered = document.getElementById("filtered-Section");
+    sectionFiltered.classList.add("hidden");
+  }
 }
 
-// body container 
-const bodyContainer = getElementOnly('body-container');
-bodyContainer.addEventListener('click', function(event){
+// body container
+const bodyContainer = getElementOnly("body-container");
+
+bodyContainer.addEventListener("click", function (event) {
+  // Interview Button Clicked
+  if (event.target.classList.contains("interview-button")) {
     const parentNode = event.target.parentNode.parentNode;
-    const companyName = document.querySelector('.company').innerText;
-    const positionName = document.querySelector('.position').innerText;
-    const locationName = document.querySelector('.location').innerText;
-    const descriptionName = document.querySelector('.description').innerText;
-    
+    const companyName = parentNode.querySelector(".company").innerText;
+    const positionName = parentNode.querySelector(".position").innerText;
+    const locationName = parentNode.querySelector(".location").innerText;
+    const descriptionName = parentNode.querySelector(".description").innerText;
+
     // creating object
     let cardInformation = {
-        companyName, 
-        positionName, 
-        locationName, 
-        descriptionName
-    }
+      companyName,
+      positionName,
+      locationName,
+      descriptionName,
+    };
 
-    const plantExists = interviewList.find(item => item.companyName === cardInformation.companyName);
-    if(!plantExists){
-        interviewList.push(cardInformation);
-    }
-})
+    const plantExists = interviewList.find(
+      (item) => item.companyName === cardInformation.companyName,
+    );
 
-function renderInterview(){
-    
+    const status = parentNode.querySelector(".badge");
+    status.innerHTML = "";
+    status.innerHTML = `
+     <button class="bg-success px-[12px] py-[8px] cursor-pointer rounded-md text-[0.875rem] font-medium">Interview</button>
+    `;
+
+    if (!plantExists) {
+      interviewList.push(cardInformation);
+    }
+    renderInterview();
+  }
+});
+
+function renderInterview() {
+  // Pulling Filtered Section and emptying it
+  const filterSection = getElementOnly("filtered-Section");
+  filterSection.innerHTML = "";
+
+  for (let interview of interviewList) {
+    // creating new div
+    let div = document.createElement("div");
+    div.classList.add(
+      "card-container",
+      "bg-[#FFFFFF]",
+      "space-y-5",
+      "p-[24px]",
+      "rounded-lg",
+      "mt-[10px]",
+    );
+    div.innerHTML = `
+            <div class="flex justify-between">
+                <div>
+                    <h1 class="company text-[#002C5C] text-[1.125rem]">PixelCraft Labs</h1>
+                    <p class="position text-[#64748B]">Frontend Developer</p>
+                </div>
+                <div>
+                    <button class="btn rounded-full p-3"><i class="fa-regular fa-trash-can"></i></button>
+                </div>
+            </div>
+            <p class="location text-[#64748B] mt-[20px] mb-[20px]">Remote • Full-time • $1,200–$1,800/month</p>
+            <div>
+                <button class="bg-[#EEF4FF] px-[12px] py-[8px] cursor-pointer rounded-md text-[0.875rem] font-medium">Not Applied</button>
+            </div>
+            <p class="description">Build responsive user interfaces using React, Tailwind CSS, and modern JavaScript.</p>
+            <div class="flex flex-row gap-[10px]">
+                <button id="interview-btn" class="btn btn-outline btn-success">Interview</button>
+                <button id="rejected-btn" class="btn btn-outline btn-error">Rejected</button>
+            </div>
+    `;
+    filterSection.appendChild(div);
+  }
 }
-

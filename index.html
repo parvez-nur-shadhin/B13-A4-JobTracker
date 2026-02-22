@@ -1,260 +1,440 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Daisy Ui and Tailwind CSS -->
-     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- Daisy Ui Theme -->
-     <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css"
+      rel="stylesheet"
+      type="text/css"
+    />
     <!-- Google Fonts -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
     <!-- Font Awesome -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
     <title>Job Tracker</title>
 
     <style>
-        *{
-            font-family: "Geist", sans-serif;
-        }
+      * {
+        font-family: "Geist", sans-serif;
+      }
     </style>
-</head>
-<body id="body-container" class="bg-[#F8FAFC]">
-
+  </head>
+  <body id="body-container" class="bg-[#F8FAFC]">
     <!-- Heading Section -->
     <header class="max-w-[1100px] mx-auto pt-[60px]">
-        <!-- Heading Text -->
-        <div>
-            <h1 class="text-[#002C5C] text-[2rem] font-bold">Job Application Tracker</h1>
+      <!-- Heading Text -->
+      <div>
+        <h1 class="text-[#002C5C] text-[2rem] font-bold">
+          Job Application Tracker
+        </h1>
+      </div>
+      <!-- Counting Area -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
+        <div class="bg-white p-[20px] rounded-lg">
+          <h2 class="text-[0.875rem] text-[#002C5C]">Total</h2>
+          <h1
+            id="total-counting"
+            class="text-[1.5rem] text-[#002C5C] font-bold mt-[10px]"
+          >
+            0
+          </h1>
         </div>
-        <!-- Counting Area -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
-            <div class="bg-white p-[20px] rounded-lg">
-                <h2 class="text-[0.875rem] text-[#002C5C]">Total</h2>
-                <h1 id="total-counting" class="text-[1.5rem] text-[#002C5C] font-bold mt-[10px]">0</h1>
-            </div>
-            <div class="bg-white p-[20px] rounded-lg">
-                <h2 class="text-[0.875rem] text-[#002C5C]">Interview</h2>
-                <h1 id="interview-counting" class="text-[1.5rem] text-[#10B981] font-bold mt-[10px]">0</h1>
-            </div>
-            <div class="bg-white p-[20px] rounded-lg">
-                <h2 class="text-[0.875rem] text-[#002C5C]">Rejected</h2>
-                <h1 id="rejected-counting" class="text-[1.5rem] text-[#EF4444] font-bold mt-[10px]">0</h1>
-            </div>
+        <div class="bg-white p-[20px] rounded-lg">
+          <h2 class="text-[0.875rem] text-[#002C5C]">Interview</h2>
+          <h1
+            id="interview-counting"
+            class="text-[1.5rem] text-[#10B981] font-bold mt-[10px]"
+          >
+            0
+          </h1>
         </div>
+        <div class="bg-white p-[20px] rounded-lg">
+          <h2 class="text-[0.875rem] text-[#002C5C]">Rejected</h2>
+          <h1
+            id="rejected-counting"
+            class="text-[1.5rem] text-[#EF4444] font-bold mt-[10px]"
+          >
+            0
+          </h1>
+        </div>
+      </div>
     </header>
 
-    <hr class="max-w-[1100px] mx-auto opacity-10 mt-[30px] mb-[30px]">
+    <hr class="max-w-[1100px] mx-auto opacity-10 mt-[30px] mb-[30px]" />
 
     <!-- Button Section -->
     <section class="max-w-[1100px] mx-auto">
-        <!-- Section Heading -->
-        <div  class="flex flex-row justify-between">
-            <div>
-                <h1 class="text-[#002C5C] text-[1.25rem] font-semibold">Available Jobs</h1>
-            </div>
-            <div>
-                <p class="text-[#64748B] font-medium"><span id="job-counter">8</span> jobs</p>
-            </div>
+      <!-- Section Heading -->
+      <div class="flex flex-row justify-between">
+        <div>
+          <h1 class="text-[#002C5C] text-[1.25rem] font-semibold">
+            Available Jobs
+          </h1>
         </div>
-        <!-- Button Section -->
-        <div class="max-w-[1100px] mx-auto flex gap-[8px] mt-6">
-            <button onclick="toggleStyle('all-btn')" id="all-btn" class="btn btn-outline btn-info">All</button>
-            <button onclick="toggleStyle('interview-btn')" id="interview-btn" class="btn btn-outline btn-info">Interview</button>
-            <button onclick="toggleStyle('rejected-btn')" id="rejected-btn" class="btn btn-outline btn-info">Rejected</button>
+        <div>
+          <p class="text-[#64748B] font-medium">
+            <span id="job-counter">8</span> jobs
+          </p>
         </div>
+      </div>
+      <!-- Button Section -->
+      <div class="max-w-[1100px] mx-auto flex gap-[8px] mt-6">
+        <button
+          onclick="toggleStyle('all-btn')"
+          id="all-btn"
+          class="btn btn-outline btn-info"
+        >
+          All
+        </button>
+        <button
+          onclick="toggleStyle('interview-btn')"
+          id="interview-btn"
+          class="btn btn-outline btn-info"
+        >
+          Interview
+        </button>
+        <button
+          onclick="toggleStyle('rejected-btn')"
+          id="rejected-btn"
+          class="btn btn-outline btn-info"
+        >
+          Rejected
+        </button>
+      </div>
     </section>
 
     <!-- job cards -->
-     <section id="all-job-cards" class="max-w-[1100px] mx-auto">
-        <!-- Div Card -->
-        <div class="card-container bg-[#FFFFFF] space-y-5 p-[24px] rounded-lg mt-[10px]">
-            <div class="flex justify-between">
-                <div>
-                    <h1 class="company text-[#002C5C] text-[1.125rem]">PixelCraft Labs</h1>
-                    <p class="position text-[#64748B]">Frontend Developer</p>
-                </div>
-                <div>
-                    <button class="btn rounded-full p-3"><i class="fa-regular fa-trash-can"></i></button>
-                </div>
-            </div>
-            <p class="location text-[#64748B] mt-[20px] mb-[20px]">Remote • Full-time • $1,200–$1,800/month</p>
-            <div>
-                <button class="bg-[#EEF4FF] px-[12px] py-[8px] cursor-pointer rounded-md text-[0.875rem] font-medium">Not Applied</button>
-            </div>
-            <p class="description">Build responsive user interfaces using React, Tailwind CSS, and modern JavaScript.</p>
-            <div class="flex flex-row gap-[10px]">
-                <button id="interview-btn" class="btn btn-outline btn-success">Interview</button>
-                <button id="rejected-btn" class="btn btn-outline btn-error">Rejected</button>
-            </div>
+    <section id="all-job-cards" class="max-w-[1100px] mx-auto">
+      <!-- Div Card 1-->
+      <div
+        class="card-container bg-[#FFFFFF] space-y-5 p-[24px] rounded-lg mt-[10px]"
+      >
+        <div class="flex justify-between">
+          <div>
+            <h1 class="company text-[#002C5C] text-[1.125rem]">
+              PixelCraft Labs
+            </h1>
+            <p class="position text-[#64748B]">Frontend Developer</p>
+          </div>
+          <div>
+            <button class="btn rounded-full p-3">
+              <i class="fa-regular fa-trash-can"></i>
+            </button>
+          </div>
         </div>
-        <!-- Div Card -->
-        <div class="card-container bg-[#FFFFFF] space-y-5 p-[24px] rounded-lg mt-[10px]">
-            <div class="flex justify-between">
-                <div>
-                    <h1 class="company text-[#002C5C] text-[1.125rem]">DataForge Systems</h1>
-                    <p class="position text-[#64748B]">Backend Developer</p>
-                </div>
-                <div>
-                    <button class="btn rounded-full p-3"><i class="fa-regular fa-trash-can"></i></button>
-                </div>
-            </div>
-            <p class="location text-[#64748B] mt-[20px] mb-[20px]">Dhaka • Full-Time • $1,500–$2,200/month</p>
-            <div>
-                <button class="bg-[#EEF4FF] px-[12px] py-[8px] cursor-pointer rounded-md text-[0.875rem] font-medium">Not Applied</button>
-            </div>
-            <p class="description">Develop scalable APIs and manage databases using Node.js and MongoDB.</p>
-            <div class="flex flex-row gap-[10px]">
-                <button id="interview-btn" class="btn btn-outline btn-success">Interview</button>
-                <button id="rejected-btn" class="btn btn-outline btn-error">Rejected</button>
-            </div>
+        <p class="location text-[#64748B] mt-[20px] mb-[20px]">
+          Remote • Full-time • $1,200–$1,800/month
+        </p>
+        <div class="badge">
+          <button
+            class="bg-[#EEF4FF] px-[12px] py-[8px] cursor-pointer rounded-md text-[0.875rem] font-medium"
+          >
+            Not Applied
+          </button>
         </div>
-        <!-- Div Card -->
-        <div class="card-container bg-[#FFFFFF] space-y-5 p-[24px] rounded-lg mt-[10px]">
-            <div class="flex justify-between">
-                <div>
-                    <h1 class="company text-[#002C5C] text-[1.125rem]">CodeNest Technologies</h1>
-                    <p class="position text-[#64748B]">Full Stack Developer</p>
-                </div>
-                <div>
-                    <button class="btn rounded-full p-3"><i class="fa-regular fa-trash-can"></i></button>
-                </div>
-            </div>
-            <p class="location text-[#64748B] mt-[20px] mb-[20px]">Hybrid • Full-time • $1,800 - $2,500/month</p>
-            <div>
-                <button class="bg-[#EEF4FF] px-[12px] py-[8px] cursor-pointer rounded-md text-[0.875rem] font-medium">Not Applied</button>
-            </div>
-            <p class="description">Work on both frontend and backend systems to deliver complete web applications.</p>
-            <div class="flex flex-row gap-[10px]">
-                <button id="interview-btn" class="btn btn-outline btn-success">Interview</button>
-                <button id="rejected-btn" class="btn btn-outline btn-error">Rejected</button>
-            </div>
+        <p class="description">
+          Build responsive user interfaces using React, Tailwind CSS, and modern
+          JavaScript.
+        </p>
+        <div class="flex flex-row gap-[10px]">
+          <button class="interview-button btn btn-outline btn-success">
+            Interview
+          </button>
+          <button class="rejected-btn btn btn-outline btn-error">
+            Rejected
+          </button>
         </div>
-        <!-- Div Card -->
-        <div class="card-container bg-[#FFFFFF] space-y-5 p-[24px] rounded-lg mt-[10px]">
-            <div class="flex justify-between">
-                <div>
-                    <h1 class="company text-[#002C5C] text-[1.125rem]">Creative Byte Studio</h1>
-                    <p class="position text-[#64748B]">UI/UX Designer</p>
-                </div>
-                <div>
-                    <button class="btn rounded-full p-3"><i class="fa-regular fa-trash-can"></i></button>
-                </div>
-            </div>
-            <p class="location text-[#64748B] mt-[20px] mb-[20px]">Remote • Contract • $1,000 - $1,600/month</p>
-            <div>
-                <button class="bg-[#EEF4FF] px-[12px] py-[8px] cursor-pointer rounded-md text-[0.875rem] font-medium">Not Applied</button>
-            </div>
-            <p class="description">Design clean and intuitive user interfaces with strong focus on user experience.</p>
-            <div class="flex flex-row gap-[10px]">
-                <button id="interview-btn" class="btn btn-outline btn-success">Interview</button>
-                <button id="rejected-btn" class="btn btn-outline btn-error">Rejected</button>
-            </div>
+      </div>
+      <!-- Div Card 2-->
+      <div
+        class="card-container bg-[#FFFFFF] space-y-5 p-[24px] rounded-lg mt-[10px]"
+      >
+        <div class="flex justify-between">
+          <div>
+            <h1 class="company text-[#002C5C] text-[1.125rem]">
+              DataForge Systems
+            </h1>
+            <p class="position text-[#64748B]">Backend Developer</p>
+          </div>
+          <div>
+            <button class="btn rounded-full p-3">
+              <i class="fa-regular fa-trash-can"></i>
+            </button>
+          </div>
         </div>
-        <!-- Div Card -->
-        <div class="card-container bg-[#FFFFFF] space-y-5 p-[24px] rounded-lg mt-[10px]">
-            <div class="flex justify-between">
-                <div>
-                    <h1 class="company text-[#002C5C] text-[1.125rem]">CloudNova Inc.</h1>
-                    <p class="position text-[#64748B]">DevOps Engineer</p>
-                </div>
-                <div>
-                    <button class="btn rounded-full p-3"><i class="fa-regular fa-trash-can"></i></button>
-                </div>
-            </div>
-            <p class="location text-[#64748B] mt-[20px] mb-[20px]">Singapore • Full-time • $2,000 - $3,000/month</p>
-            <div>
-                <button class="bg-[#EEF4FF] px-[12px] py-[8px] cursor-pointer rounded-md text-[0.875rem] font-medium">Not Applied</button>
-            </div>
-            <p class="description">Manage CI/CD pipelines, cloud infrastructure, and server deployments.</p>
-            <div class="flex flex-row gap-[10px]">
-                <button id="interview-btn" class="btn btn-outline btn-success">Interview</button>
-                <button id="rejected-btn" class="btn btn-outline btn-error">Rejected</button>
-            </div>
+        <p class="location text-[#64748B] mt-[20px] mb-[20px]">
+          Dhaka • Full-Time • $1,500–$2,200/month
+        </p>
+        <div class="badge">
+          <button
+            class="bg-[#EEF4FF] px-[12px] py-[8px] cursor-pointer rounded-md text-[0.875rem] font-medium"
+          >
+            Not Applied
+          </button>
         </div>
-        <!-- Div Card -->
-        <div class="card-container bg-[#FFFFFF] space-y-5 p-[24px] rounded-lg mt-[10px]">
-            <div class="flex justify-between">
-                <div>
-                    <h1 class="company text-[#002C5C] text-[1.125rem]">AppVerse Solutions</h1>
-                    <p class="position text-[#64748B]">Mobile App Developer</p>
-                </div>
-                <div>
-                    <button class="btn rounded-full p-3"><i class="fa-regular fa-trash-can"></i></button>
-                </div>
-            </div>
-            <p class="location text-[#64748B] mt-[20px] mb-[20px]">Remote • Full-time • $1,400 - $2,000/month</p>
-            <div>
-                <button class="bg-[#EEF4FF] px-[12px] py-[8px] cursor-pointer rounded-md text-[0.875rem] font-medium">Not Applied</button>
-            </div>
-            <p class="description">Develop Android and iOS apps using Flutter or React Native.</p>
-            <div class="flex flex-row gap-[10px]">
-                <button id="interview-btn" class="btn btn-outline btn-success">Interview</button>
-                <button id="rejected-btn" class="btn btn-outline btn-error">Rejected</button>
-            </div>
+        <p class="description">
+          Develop scalable APIs and manage databases using Node.js and MongoDB.
+        </p>
+        <div class="flex flex-row gap-[10px]">
+          <button class="interview-button btn btn-outline btn-success">
+            Interview
+          </button>
+          <button class="btn btn-outline btn-error">Rejected</button>
         </div>
-        <!-- Div Card -->
-        <div class="card-container bg-[#FFFFFF] space-y-5 p-[24px] rounded-lg mt-[10px]">
-            <div class="flex justify-between">
-                <div>
-                    <h1 class="company text-[#002C5C] text-[1.125rem]">InsightGrid Analytics</h1>
-                    <p class="position text-[#64748B]">Data Analyst</p>
-                </div>
-                <div>
-                    <button class="btn rounded-full p-3"><i class="fa-regular fa-trash-can"></i></button>
-                </div>
-            </div>
-            <p class="location text-[#64748B] mt-[20px] mb-[20px]">Dhaka • Full-time • $1,200 - $1,900/month</p>
-            <div>
-                <button class="bg-[#EEF4FF] px-[12px] py-[8px] cursor-pointer rounded-md text-[0.875rem] font-medium">Not Applied</button>
-            </div>
-            <p class="description">Analyze datasets and generate insights using Python, SQL, and visualization tools.</p>
-            <div class="flex flex-row gap-[10px]">
-                <button id="interview-btn" class="btn btn-outline btn-success">Interview</button>
-                <button id="rejected-btn" class="btn btn-outline btn-error">Rejected</button>
-            </div>
+      </div>
+      <!-- Div Card 3-->
+      <div
+        class="card-container bg-[#FFFFFF] space-y-5 p-[24px] rounded-lg mt-[10px]"
+      >
+        <div class="flex justify-between">
+          <div>
+            <h1 class="company text-[#002C5C] text-[1.125rem]">
+              CodeNest Technologies
+            </h1>
+            <p class="position text-[#64748B]">Full Stack Developer</p>
+          </div>
+          <div>
+            <button class="btn rounded-full p-3">
+              <i class="fa-regular fa-trash-can"></i>
+            </button>
+          </div>
         </div>
-        <!-- Div Card -->
-        <div class="card-container bg-[#FFFFFF] space-y-5 p-[24px] rounded-lg mt-[10px]">
-            <div class="flex justify-between">
-                <div>
-                    <h1 class="company text-[#002C5C] text-[1.125rem]">SecureNet Technologies</h1>
-                    <p class="position text-[#64748B]">Cybersecurity Specialist</p>
-                </div>
-                <div>
-                    <button class="btn rounded-full p-3"><i class="fa-regular fa-trash-can"></i></button>
-                </div>
-            </div>
-            <p class="location text-[#64748B] mt-[20px] mb-[20px]">Remote • Full-time • $1,800 - $2,800/month</p>
-            <div>
-                <button class="bg-[#EEF4FF] px-[12px] py-[8px] cursor-pointer rounded-md text-[0.875rem] font-medium">Not Applied</button>
-            </div>
-            <p class="description">Monitor systems, identify vulnerabilities, and protect networks from cyber threats.</p>
-            <div class="flex flex-row gap-[10px]">
-                <button id="interview-btn" class="btn btn-outline btn-success">Interview</button>
-                <button id="rejected-btn" class="btn btn-outline btn-error">Rejected</button>
-            </div>
+        <p class="location text-[#64748B] mt-[20px] mb-[20px]">
+          Hybrid • Full-time • $1,800 - $2,500/month
+        </p>
+        <div class="badge">
+          <button
+            class="bg-[#EEF4FF] px-[12px] py-[8px] cursor-pointer rounded-md text-[0.875rem] font-medium"
+          >
+            Not Applied
+          </button>
         </div>
-     </section>
+        <p class="description">
+          Work on both frontend and backend systems to deliver complete web
+          applications.
+        </p>
+        <div class="flex flex-row gap-[10px]">
+          <button class="interview-button btn btn-outline btn-success">
+            Interview
+          </button>
+          <button class="btn btn-outline btn-error">Rejected</button>
+        </div>
+      </div>
+      <!-- Div Card 4-->
+      <div
+        class="card-container bg-[#FFFFFF] space-y-5 p-[24px] rounded-lg mt-[10px]"
+      >
+        <div class="flex justify-between">
+          <div>
+            <h1 class="company text-[#002C5C] text-[1.125rem]">
+              Creative Byte Studio
+            </h1>
+            <p class="position text-[#64748B]">UI/UX Designer</p>
+          </div>
+          <div>
+            <button class="btn rounded-full p-3">
+              <i class="fa-regular fa-trash-can"></i>
+            </button>
+          </div>
+        </div>
+        <p class="location text-[#64748B] mt-[20px] mb-[20px]">
+          Remote • Contract • $1,000 - $1,600/month
+        </p>
+        <div class="badge">
+          <button
+            class="bg-[#EEF4FF] px-[12px] py-[8px] cursor-pointer rounded-md text-[0.875rem] font-medium"
+          >
+            Not Applied
+          </button>
+        </div>
+        <p class="description">
+          Design clean and intuitive user interfaces with strong focus on user
+          experience.
+        </p>
+        <div class="flex flex-row gap-[10px]">
+          <button class="interview-button btn btn-outline btn-success">
+            Interview
+          </button>
+          <button class="btn btn-outline btn-error">Rejected</button>
+        </div>
+      </div>
+      <!-- Div Card 5-->
+      <div
+        class="card-container bg-[#FFFFFF] space-y-5 p-[24px] rounded-lg mt-[10px]"
+      >
+        <div class="flex justify-between">
+          <div>
+            <h1 class="company text-[#002C5C] text-[1.125rem]">
+              CloudNova Inc.
+            </h1>
+            <p class="position text-[#64748B]">DevOps Engineer</p>
+          </div>
+          <div>
+            <button class="btn rounded-full p-3">
+              <i class="fa-regular fa-trash-can"></i>
+            </button>
+          </div>
+        </div>
+        <p class="location text-[#64748B] mt-[20px] mb-[20px]">
+          Singapore • Full-time • $2,000 - $3,000/month
+        </p>
+        <div class="badge">
+          <button
+            class="bg-[#EEF4FF] px-[12px] py-[8px] cursor-pointer rounded-md text-[0.875rem] font-medium"
+          >
+            Not Applied
+          </button>
+        </div>
+        <p class="description">
+          Manage CI/CD pipelines, cloud infrastructure, and server deployments.
+        </p>
+        <div class="flex flex-row gap-[10px]">
+          <button class="interview-button btn btn-outline btn-success">
+            Interview
+          </button>
+          <button class="btn btn-outline btn-error">Rejected</button>
+        </div>
+      </div>
+      <!-- Div Card 6-->
+      <div
+        class="card-container bg-[#FFFFFF] space-y-5 p-[24px] rounded-lg mt-[10px]"
+      >
+        <div class="flex justify-between">
+          <div>
+            <h1 class="company text-[#002C5C] text-[1.125rem]">AppVerse Solutions</h1>
+            <p class="position text-[#64748B]">Mobile App Developer</p>
+          </div>
+          <div>
+            <button class="btn rounded-full p-3">
+              <i class="fa-regular fa-trash-can"></i>
+            </button>
+          </div>
+        </div>
+        <p class="location text-[#64748B] mt-[20px] mb-[20px]">
+          Remote • Full-time • $1,400 - $2,000/month
+        </p>
+        <div class="badge">
+          <button
+            class="bg-[#EEF4FF] px-[12px] py-[8px] cursor-pointer rounded-md text-[0.875rem] font-medium"
+          >
+            Not Applied
+          </button>
+        </div>
+        <p class="description">
+          Develop Android and iOS apps using Flutter or React Native.
+        </p>
+        <div class="flex flex-row gap-[10px]">
+          <button class="interview-button btn btn-outline btn-success">
+            Interview
+          </button>
+          <button class="btn btn-outline btn-error">Rejected</button>
+        </div>
+      </div>
+      <!-- Div Card 7-->
+      <div
+        class="card-container bg-[#FFFFFF] space-y-5 p-[24px] rounded-lg mt-[10px]"
+      >
+        <div class="flex justify-between">
+          <div>
+            <h1 class="company text-[#002C5C] text-[1.125rem]">
+              InsightGrid Analytics
+            </h1>
+            <p class="position text-[#64748B]">Data Analyst</p>
+          </div>
+          <div>
+            <button class="btn rounded-full p-3">
+              <i class="fa-regular fa-trash-can"></i>
+            </button>
+          </div>
+        </div>
+        <p class="location text-[#64748B] mt-[20px] mb-[20px]">
+          Dhaka • Full-time • $1,200 - $1,900/month
+        </p>
+        <div class="badge">
+          <button
+            class="bg-[#EEF4FF] px-[12px] py-[8px] cursor-pointer rounded-md text-[0.875rem] font-medium"
+          >
+            Not Applied
+          </button>
+        </div>
+        <p class="description">
+          Analyze datasets and generate insights using Python, SQL, and
+          visualization tools.
+        </p>
+        <div class="flex flex-row gap-[10px]">
+          <button class="interview-button btn btn-outline btn-success">
+            Interview
+          </button>
+          <button class="btn btn-outline btn-error">Rejected</button>
+        </div>
+      </div>
+      <!-- Div Card 8-->
+      <div
+        class="card-container bg-[#FFFFFF] space-y-5 p-[24px] rounded-lg mt-[10px]"
+      >
+        <div class="flex justify-between">
+          <div>
+            <h1 class="company text-[#002C5C] text-[1.125rem]">
+              SecureNet Technologies
+            </h1>
+            <p class="position text-[#64748B]">Cybersecurity Specialist</p>
+          </div>
+          <div>
+            <button class="btn rounded-full p-3">
+              <i class="fa-regular fa-trash-can"></i>
+            </button>
+          </div>
+        </div>
+        <p class="location text-[#64748B] mt-[20px] mb-[20px]">
+          Remote • Full-time • $1,800 - $2,800/month
+        </p>
+        <div class="badge">
+          <button
+            class="bg-[#EEF4FF] px-[12px] py-[8px] cursor-pointer rounded-md text-[0.875rem] font-medium"
+          >
+            Not Applied
+          </button>
+        </div>
+        <p class="description">
+          Monitor systems, identify vulnerabilities, and protect networks from
+          cyber threats.
+        </p>
+        <div class="flex flex-row gap-[10px]">
+          <button class="interview-button btn btn-outline btn-success">
+            Interview
+          </button>
+          <button class="btn btn-outline btn-error">Rejected</button>
+        </div>
+      </div>
+    </section>
 
-     <section id="interview-section">
+    <section id="filtered-Section" class="max-w-[1100px] mx-auto hidden"></section>
 
-     </section>
+    
 
-    <!-- no jobs available -->
-     <!-- <section id="no-jobs-available" class="max-w-[1100px] mx-auto grid grid-cols-1 items-center justify-center gap-4 px-[14px] py-[100px] bg-white mt-5 hidden">
-        <img src="./jobs.png" alt="job-image">
-        <h1 class="text-[4rem] text-[#002C5C] font-semibold">No jobs available</h1>
-        <p class="text-[#64748B]">Check back soon for new job opportunities</p>
-     </section> -->
-
-
-     <!-- Javascript Link-->
-      <script src="./javascript/machine.js"></script>
-      <script src="./javascript/script.js"></script>
-</body>
+    <!-- Javascript Link-->
+    <script src="./javascript/machine.js"></script>
+    <script src="./javascript/script.js"></script>
+  </body>
 </html>
