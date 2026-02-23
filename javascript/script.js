@@ -154,10 +154,10 @@ bodyContainer.addEventListener("click", function (event) {
 
     finalCount();
   }
-  if (event.target.classList.contains("delete-button")) {
-    const card = event.target.parentNode.parentNode.parentNode;
+  if (event.target.closest(".delete-button")) {
+    const card = event.target.closest(".card-container");
     const companyName = card.querySelector(".company").innerText.trim();
-    const pNode = event.target.parentNode.parentNode.parentNode;
+    const pNode = event.target.parentNode.parentNode.parentNode.parentNode;
     pNode.remove();
     interviewList = interviewList.filter(
       (item) => item.companyName !== companyName,
@@ -167,7 +167,7 @@ bodyContainer.addEventListener("click", function (event) {
     );
 
     finalCount();
-
+    
     if (currentStatus === "interview-btn") {
       renderInterview();
     }
