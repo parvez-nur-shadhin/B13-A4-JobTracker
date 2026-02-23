@@ -3,7 +3,7 @@
 // list array
 let interviewList = [];
 let rejectedList = [];
-let currentStatus = 'all'
+let currentStatus = "all";
 
 // Counting Numbers
 const totalCount = getElementValues("total-counting");
@@ -24,6 +24,8 @@ function finalCount() {
   document.getElementById("interview-counting").innerText =
     interviewList.length;
   document.getElementById("rejected-counting").innerText = rejectedList.length;
+  document.getElementById("job-counter").innerText =
+    allJobCards.children.length;
 }
 finalCount();
 
@@ -97,13 +99,11 @@ bodyContainer.addEventListener("click", function (event) {
       (item) => item.companyName != cardInformation.companyName,
     );
 
-    if (currentStatus === 'rejected-btn'){
+    if (currentStatus === "rejected-btn") {
       renderRejected();
     }
 
     finalCount();
-
-
   } else if (event.target.classList.contains("rejected-btn")) {
     const parentNode = event.target.parentNode.parentNode;
     const companyName = parentNode.querySelector(".company").innerText.trim();
@@ -138,19 +138,32 @@ bodyContainer.addEventListener("click", function (event) {
       (item) => item.companyName != cardInformation.companyName,
     );
 
-    if(currentStatus === 'interview-btn'){
+    if (currentStatus === "interview-btn") {
       renderInterview();
     }
 
     finalCount();
-    
   }
   if (event.target.classList.contains("delete-button")) {
-
+    const card = event.target.parentNode.parentNode.parentNode;
+    const companyName = card.querySelector(".company").innerText.trim();
     const pNode = event.target.parentNode.parentNode.parentNode;
     pNode.remove();
+    interviewList = interviewList.filter(
+      (item) => item.companyName !== companyName,
+    );
+    rejectedList = rejectedList.filter(
+      (item) => item.companyName !== companyName,
+    );
+
     finalCount();
 
+    if (currentStatus === "interview-btn") {
+      renderInterview();
+    }
+    if (currentStatus === "rejected-btn") {
+      renderRejected();
+    }
   }
 });
 
@@ -159,6 +172,19 @@ function renderInterview() {
   // Pulling Filtered Section and emptying it
   const filterSection = getElementOnly("filtered-Section");
   filterSection.innerHTML = "";
+
+  if (interviewList.length === 0) {
+    filterSection.innerHTML = `
+    <div id="if-empty" class=" flex flex-col items-center justify-center gap-5 px-[30px] py-[110px]">
+          <img width = "100px" height = "100px" src="./jobs.png" alt="if-empty">
+          <div class="flex flex-col gap-[5px] justify-center items-center">
+            <h1 class="text-[1.5rem] font-semibold">No jobs available</h1>
+            <p class="text-[#64748]">Check back soon for new job opportunities</p>
+          </div>
+    </div>
+    `;
+    return;
+  }
 
   for (let interview of interviewList) {
     // creating new div
@@ -178,7 +204,7 @@ function renderInterview() {
                     <p class="position text-[#64748B]">${interview.positionName}</p>
                 </div>
                 <div>
-                    <button class="btn rounded-full p-3"><i class="fa-regular fa-trash-can"></i></button>
+                    <button class="delete-button btn rounded-full p-3"><i class="fa-regular fa-trash-can"></i></button>
                 </div>
             </div>
             <p class="location text-[#64748B] mt-[20px] mb-[20px]">${interview.locationName}</p>
@@ -200,6 +226,19 @@ function renderRejected() {
   const filterSection = getElementOnly("filtered-Section");
   filterSection.innerHTML = "";
 
+  if (rejectedList.length === 0) {
+    filterSection.innerHTML = `
+    <div id="if-empty" class=" flex flex-col items-center justify-center gap-5 px-[30px] py-[110px]">
+          <img width = "100px" height = "100px" src="./jobs.png" alt="if-empty">
+          <div class="flex flex-col gap-[5px] justify-center items-center">
+            <h1 class="text-[1.5rem] font-semibold">No jobs available</h1>
+            <p class="text-[#64748]">Check back soon for new job opportunities</p>
+          </div>
+    </div>
+    `;
+    return;
+  }
+
   for (let rejected of rejectedList) {
     // creating new div
     let div = document.createElement("div");
@@ -218,7 +257,7 @@ function renderRejected() {
                     <p class="position text-[#64748B]">${rejected.positionName}</p>
                 </div>
                 <div>
-                    <button class="btn rounded-full p-3"><i class="fa-regular fa-trash-can"></i></button>
+                    <button class="delete-button btn rounded-full p-3"><i class="fa-regular fa-trash-can"></i></button>
                 </div>
             </div>
             <p class="location text-[#64748B] mt-[20px] mb-[20px]">${rejected.locationName}</p>
