@@ -154,7 +154,7 @@ bodyContainer.addEventListener("click", function (event) {
 
     finalCount();
   }
-  if (event.target.closest(".delete-button")) {
+  if (event.target.closest(".delete-img")) {
     const card = event.target.closest(".card-container");
     const companyName = card.querySelector(".company").innerText.trim();
     const pNode = event.target.parentNode.parentNode.parentNode.parentNode;
@@ -165,15 +165,38 @@ bodyContainer.addEventListener("click", function (event) {
     rejectedList = rejectedList.filter(
       (item) => item.companyName !== companyName,
     );
-
-    finalCount();
     
+    finalCount();
+
     if (currentStatus === "interview-btn") {
       renderInterview();
     }
     if (currentStatus === "rejected-btn") {
       renderRejected();
     }
+    
+  }
+   else if (event.target.closest(".delete-button")) {
+    const card = event.target.closest(".card-container");
+    const companyName = card.querySelector(".company").innerText.trim();
+    const pNode = event.target.parentNode.parentNode.parentNode;
+    pNode.remove();
+    interviewList = interviewList.filter(
+      (item) => item.companyName !== companyName,
+    );
+    rejectedList = rejectedList.filter(
+      (item) => item.companyName !== companyName,
+    );
+    
+    finalCount();
+
+    if (currentStatus === "interview-btn") {
+      renderInterview();
+    }
+    if (currentStatus === "rejected-btn") {
+      renderRejected();
+    }
+    
   }
 });
 
@@ -214,7 +237,7 @@ function renderInterview() {
                     <p class="position text-[#64748B]">${interview.positionName}</p>
                 </div>
                 <div>
-                    <button class="delete-button btn rounded-full p-3"><i class="fa-regular fa-trash-can"></i></button>
+                    <button class="delete-button btn rounded-full p-3"><i class="delete-img fa-regular fa-trash-can"></i></button>
                 </div>
             </div>
             <p class="location text-[#64748B] mt-[20px] mb-[20px]">${interview.locationName}</p>
@@ -267,7 +290,7 @@ function renderRejected() {
                     <p class="position text-[#64748B]">${rejected.positionName}</p>
                 </div>
                 <div>
-                    <button class="delete-button btn rounded-full p-3"><i class="fa-regular fa-trash-can"></i></button>
+                    <button class="delete-button btn rounded-full p-3"><i class="delete-img fa-regular fa-trash-can"></i></button>
                 </div>
             </div>
             <p class="location text-[#64748B] mt-[20px] mb-[20px]">${rejected.locationName}</p>
