@@ -175,7 +175,7 @@ function renderInterview() {
 
   if (interviewList.length === 0) {
     filterSection.innerHTML = `
-    <div id="if-empty" class=" flex flex-col items-center justify-center gap-5 px-[30px] py-[110px]">
+    <div id="if-empty" class="flex flex-col items-center justify-center gap-5 px-[30px] py-[110px] mt-3 bg-white rounded-md">
           <img width = "100px" height = "100px" src="./jobs.png" alt="if-empty">
           <div class="flex flex-col gap-[5px] justify-center items-center">
             <h1 class="text-[1.5rem] font-semibold">No jobs available</h1>
@@ -228,7 +228,7 @@ function renderRejected() {
 
   if (rejectedList.length === 0) {
     filterSection.innerHTML = `
-    <div id="if-empty" class=" flex flex-col items-center justify-center gap-5 px-[30px] py-[110px]">
+    <div id="if-empty" class="flex flex-col items-center justify-center gap-5 px-[30px] py-[110px] mt-3 bg-white rounded-md">
           <img width = "100px" height = "100px" src="./jobs.png" alt="if-empty">
           <div class="flex flex-col gap-[5px] justify-center items-center">
             <h1 class="text-[1.5rem] font-semibold">No jobs available</h1>
