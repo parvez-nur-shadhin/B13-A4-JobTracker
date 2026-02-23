@@ -24,8 +24,18 @@ function finalCount() {
   document.getElementById("interview-counting").innerText =
     interviewList.length;
   document.getElementById("rejected-counting").innerText = rejectedList.length;
-  document.getElementById("job-counter").innerText =
-    allJobCards.children.length;
+
+  console.log(currentStatus);
+  if (currentStatus === "all-btn") {
+    document.getElementById("job-counter").innerText =
+      allJobCards.children.length;
+  }
+  if (currentStatus === "interview-btn") {
+    document.getElementById("job-counter").innerText = interviewList.length;
+  }
+  if (currentStatus === "rejected-btn") {
+    document.getElementById("job-counter").innerText = rejectedList.length;
+  }
 }
 finalCount();
 
@@ -36,7 +46,6 @@ function toggleStyle(id) {
 
   const clickedBtn = getElementOnly(id);
   currentStatus = id;
-  console.log(currentStatus);
   clickedBtn.classList.add("bg-[#3B82F6]", "text-white");
 
   if (id === "interview-btn") {
@@ -59,6 +68,7 @@ function toggleStyle(id) {
     sectionFiltered.classList.remove("hidden");
     renderRejected();
   }
+  finalCount();
 }
 
 // body container
